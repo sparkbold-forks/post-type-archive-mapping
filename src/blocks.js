@@ -9,4 +9,5 @@
  * Webpack is compiling as the input file.
  */
 
-import './block/block.js';
+import './block/custom-post-type/block.js';
+import './block/custom-posts-advanced/block.js';
