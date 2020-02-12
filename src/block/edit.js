@@ -419,7 +419,59 @@ class PTAM_Custom_Posts extends Component {
 	render() {
 		let htmlToReactParser = new HtmlToReactParser();
 		const { attributes, setAttributes } = this.props;
-		const { postType, term, taxonomy, displayPostDate, displayPostExcerpt, displayPostAuthor, displayPostImage,displayPostLink, align, postLayout, columns, order, pagination, orderBy, postsToShow, readMoreText, imageLocation, taxonomyLocation, imageType, imageTypeSize, avatarSize, changeCapitilization, displayTaxonomies, trimWords, titleAlignment, customFieldAlignment, imageAlignment, metaAlignment, contentAlignment, padding, border, borderRounded, borderColor, backgroundColor, titleColor, customFieldsColor, linkColor, contentColor, continueReadingColor, titleFont, customFieldsFont, metaFont, contentFont, continueReadingFont, displayTitle, displayCustomFields, customFields, removeStyles, titleHeadingTag, fallbackImg } = attributes;
+		const {
+			postType,
+			term,
+			taxonomy,
+			displayPostDate,
+			displayPostExcerpt,
+			displayPostAuthor,
+			displayPostImage,
+			displayPostLink,
+			align,
+			postLayout,
+			columns,
+			order,
+			pagination,
+			orderBy,
+			postsToShow,
+			readMoreText,
+			imageLocation,
+			taxonomyLocation,
+			imageType,
+			imageTypeSize,
+			avatarSize,
+			changeCapitilization,
+			displayTaxonomies,
+			trimWords,
+			titleAlignment,
+			customFieldAlignment,
+			imageAlignment,
+			metaAlignment,
+			contentAlignment,
+			padding,
+			border,
+			borderRounded,
+			borderColor,
+			backgroundColor,
+			titleColor,
+			customFieldsColor,
+			linkColor,
+			contentColor,
+			continueReadingColor,
+			titleFont,
+			customFieldsFont,
+			metaFont,
+			contentFont,
+			continueReadingFont,
+			displayTitle,
+			displayCustomFields,
+			customFields,
+			removeStyles,
+			titleHeadingTag,
+			fallbackImg,
+			theme 
+		} = attributes;
 
 		let userTaxonomies = this.state.userTaxonomies;
 		let userTaxonomiesArray = [];
@@ -449,6 +501,17 @@ class PTAM_Custom_Posts extends Component {
 			{ value: 'h4', label: __('H4', 'post-type-archive-mapping' ) },
 			{ value: 'h5', label: __('H5', 'post-type-archive-mapping' ) },
 			{ value: 'H6', label: __('H6', 'post-type-archive-mapping' ) },
+		];
+
+		// Theme choices Options.
+		const themeChoices = [
+			{ value: 'no-theme', label: __('No Theme', 'post-type-archive-mapping' ) },
+			{ value: 'lightgray-theme', label: __('Light Gray', 'post-type-archive-mapping' ) },
+			{ value: 'boldvlue-theme', label: __('Bold Blue', 'post-type-archive-mapping' ) },
+			{ value: 'vividred-theme', label: __('Vivid Red', 'post-type-archive-mapping' ) },
+			{ value: 'pink-theme', label: __('Pink', 'post-type-archive-mapping' ) },
+			{ value: 'purple-theme', label: __('Purple', 'post-type-archive-mapping' ) },
+			{ value: 'dark-theme', label: __('Dark', 'post-type-archive-mapping' ) },
 		];
 
 		// Fonts
@@ -540,6 +603,12 @@ class PTAM_Custom_Posts extends Component {
 						onChange={ ( value ) => { this.props.setAttributes( { postsToShow: value } ); this.get_latest_posts({ postsToShow: value } ); } }
 						min={ 1 }
 						max={ 100 }
+					/>
+					<SelectControl
+							label={ __( 'Theme', 'post-type-archive-mapping' ) }
+							options={ themeChoices }
+							value={ theme }
+							onChange={ ( value ) => { this.props.setAttributes( { theme: value } ); } }
 					/>
 					{ postLayout === 'grid' &&
 						<RangeControl
@@ -989,6 +1058,7 @@ class PTAM_Custom_Posts extends Component {
 					className={ classnames(
 						this.props.className,
 						'ptam-block-post-grid',
+						theme
 					) }
 				>
 					<div
